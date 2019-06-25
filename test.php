@@ -1,5 +1,5 @@
 <?php
-    error_reporting(0);
+     error_reporting(0);
 
     if($userName == null) $userName = "Guest";
 
@@ -7,16 +7,22 @@
 
     $username = $_POST['username'];
     $email = $_POST['email'];
-    $username = $_POST['password'];
+    $password = $_POST['password'];
 
+    if ($email == "") $email = "a";
+    $result = $dbc->query("SELECT id FROM users WHERE email = '$email'");
 
-    $sql = "INSERT INTO MyGuests (username, email, password)
-            VALUES ($username, $email, $password)";
+    if($result->num_rows == 0) {
+        $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";
 
-    if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
+        if ($dbc->query($sql) === TRUE) {
+            echo "New record created successfully";
+        }else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+
+        echo "Sorry, but this email is already in-use";
     }
 
     $conn->close();

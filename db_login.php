@@ -2,10 +2,13 @@
 
     $db_host = "localhost";
     $db_username = "root";
-    $db_pass = "laviRZ873096";
+    $db_pass = "";
     $db_name = "main";
 
-    $dbc = new mysqli("$db_host", "$db_username", "$db_pass", "$db_name") or die ("Error connecting MYSQL <br>");
+    $dbc = new mysqli("$db_host", "$db_username", "$db_pass", "$db_name");
+    if ($dbc->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
     echo "Successful connection and load <br>";
 
