@@ -1,5 +1,5 @@
 <?php
-    error_reporting(0);  
+    error_reporting(0);
 
     require_once("db_login.php");
     require_once("Mail.php");
@@ -30,7 +30,7 @@
 
             if($mail->send()) echo "\nMessage sent successfully";
         }else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "Error: " . $sql . "<br>" . $dbc->error;
         }
     } else {
 
